@@ -28,6 +28,8 @@ public class BookingParseController {
         PDDocument pdDoc = new PDDocument(cosDoc);
         parsedText = pdfStripper.getText(pdDoc);
 
+        //TODO pdf doc closen siehe Warnung
+
         var listOfIndices = new ArrayList<Integer>();
 
         parsedText = parsedText.replaceAll("                                            Übertrag auf Blatt", "00.00. 00.00. ")

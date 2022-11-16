@@ -5,6 +5,8 @@ import de.VBKA.frontend.GuiController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -30,6 +32,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        new GuiController().guiEntryPoint(primaryStage);
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/entryGUI.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        primaryStage.setTitle("Volksbank Kontoauszug Analyse");
+        primaryStage.setScene(new Scene(root, 650, 450));
+        primaryStage.show();
+
     }
 }

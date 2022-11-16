@@ -1,18 +1,19 @@
 package de.VBKA.frontend;
 
+import com.jfoenix.controls.JFXListView;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -23,27 +24,41 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class GuiController {
+public class GuiController implements Initializable {
 
     @FXML
-    private Text actiontarget;
+    ListView<String> listOfAccounts;
+    Label label;
+    String[] accounts = {"Albert", "Oslo"};
+    String currentAccount;
 
-    @FXML protected void handleSubmitButtonAction(ActionEvent event) {
-        actiontarget.setText("Sign in button pressed");
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        listOfAccounts.getItems().addAll(accounts);
     }
-    public void guiEntryPoint(Stage stage) {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/entryGUI.fxml"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        Scene scene = new Scene(root, 300, 275);
+    public void addAccount(ActionEvent event) {
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setTitle("Account hinzufügen");
+        textInputDialog.setHeaderText(null);
+        textInputDialog.setGraphic(null);
+        textInputDialog.setContentText("Iban ");
+        textInputDialog.getDialogPane().setMinWidth(300);
 
-        stage.setTitle("FXML Welcome");
-        stage.setScene(scene);
-        stage.show();
+        Optional<String> result = textInputDialog.showAndWait();
+        listOfAccounts.getItems().add(result.get());
+    }
+
+    public void deleteAccount(ActionEvent event) {
+        System.out.println("delete");
+        listOfAccounts.getItems().remove(listOfAccounts.getSelectionModel().getSelectedItem());
+    }
+
+    public void inspectAccount(ActionEvent event) {
+        System.out.println("inspect " + listOfAccounts.getSelectionModel().getSelectedItem());
     }
 }
