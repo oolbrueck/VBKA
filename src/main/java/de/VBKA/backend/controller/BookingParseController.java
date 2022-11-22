@@ -17,10 +17,10 @@ public class BookingParseController {
 
     String fileName = "C:/Users/oligo/Desktop/2408043010_2022_Nr.010_Kontoauszug_vom_31.10.2022_20221111203727.pdf";
 
-    public List<String> parseBookings() throws IOException {
-        File f = new File(fileName);
+    public List<String> parseBookings(File file) throws IOException {
+        //File f = new File(fileName);
         String parsedText;
-        PDFParser parser = new PDFParser(new RandomAccessFile(f, "r"));
+        PDFParser parser = new PDFParser(new RandomAccessFile(file, "r"));
         parser.parse();
 
         COSDocument cosDoc = parser.getDocument();

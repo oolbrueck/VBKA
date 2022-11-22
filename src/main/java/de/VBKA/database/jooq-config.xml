@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+    
+    <jdbc>
+        <driver>org.h2.Driver</driver>
+        <url>jdbc:h2:./h2db</url>
+        <user>tully</user>
+        <password>tully</password>
+    </jdbc>
+
+    <generator>
+        <name>org.jooq.codegen.JavaGenerator</name>
+
+        <database>
+            <name>org.jooq.meta.h2.H2Database</name>
+            <inputSchema>PUBLIC</inputSchema>
+            <includes>.*</includes>
+            <excludes></excludes>
+            <properties>
+                <property>
+                    <key>scripts</key>
+                    <value>/src/main/java/de/VBKA/database/db.sql</value>
+                </property>
+            </properties>
+        </database>
+
+        <target>
+            <packageName>de/VBKA/database</packageName>
+            <directory>de.VBKA.database</directory>
+        </target>
+    </generator>
+</configuration>

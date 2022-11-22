@@ -14,6 +14,6 @@ public class Booking {
     private String bookedText;
     private Double amount;
     private List<Category> categories;
-    private UUID bankAccount;
+    private BankAccount bankAccount;
 
 }
