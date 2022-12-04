@@ -5,16 +5,58 @@ package de_2fVBKA_2fdatabase;
 
 
 import de_2fVBKA_2fdatabase.tables.Account;
+import de_2fVBKA_2fdatabase.tables.Booking;
+import de_2fVBKA_2fdatabase.tables.BookingRCategory;
+import de_2fVBKA_2fdatabase.tables.Category;
+import de_2fVBKA_2fdatabase.tables.CategoryMatcher;
+import de_2fVBKA_2fdatabase.tables.CategoryMatcherRCategory;
+import de_2fVBKA_2fdatabase.tables.CategoryRCategory;
+import de_2fVBKA_2fdatabase.tables.UserTable;
 
 
 /**
- * Convenience access to all tables in PUBLIC.
+ * Convenience access to all tables in VBKA.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
 
     /**
-     * The table <code>PUBLIC.ACCOUNT</code>.
+     * The table <code>VBKA.ACCOUNT</code>.
      */
     public static final Account ACCOUNT = Account.ACCOUNT;
+
+    /**
+     * The table <code>VBKA.BOOKING</code>.
+     */
+    public static final Booking BOOKING = Booking.BOOKING;
+
+    /**
+     * The table <code>VBKA.BOOKING_R_CATEGORY</code>.
+     */
+    public static final BookingRCategory BOOKING_R_CATEGORY = BookingRCategory.BOOKING_R_CATEGORY;
+
+    /**
+     * The table <code>VBKA.CATEGORY</code>.
+     */
+    public static final Category CATEGORY = Category.CATEGORY;
+
+    /**
+     * The table <code>VBKA.CATEGORY_MATCHER</code>.
+     */
+    public static final CategoryMatcher CATEGORY_MATCHER = CategoryMatcher.CATEGORY_MATCHER;
+
+    /**
+     * The table <code>VBKA.CATEGORY_MATCHER_R_CATEGORY</code>.
+     */
+    public static final CategoryMatcherRCategory CATEGORY_MATCHER_R_CATEGORY = CategoryMatcherRCategory.CATEGORY_MATCHER_R_CATEGORY;
+
+    /**
+     * The table <code>VBKA.CATEGORY_R_CATEGORY</code>.
+     */
+    public static final CategoryRCategory CATEGORY_R_CATEGORY = CategoryRCategory.CATEGORY_R_CATEGORY;
+
+    /**
+     * The table <code>VBKA.USER_TABLE</code>.
+     */
+    public static final UserTable USER_TABLE = UserTable.USER_TABLE;
 }

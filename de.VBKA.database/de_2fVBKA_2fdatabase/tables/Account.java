@@ -5,18 +5,20 @@ package de_2fVBKA_2fdatabase.tables;
 
 
 import de_2fVBKA_2fdatabase.Keys;
-import de_2fVBKA_2fdatabase.Public;
+import de_2fVBKA_2fdatabase.Vbka;
 import de_2fVBKA_2fdatabase.tables.records.AccountRecord;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function1;
+import org.jooq.Function2;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row1;
+import org.jooq.Row2;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -37,7 +39,7 @@ public class Account extends TableImpl<AccountRecord> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The reference instance of <code>PUBLIC.ACCOUNT</code>
+     * The reference instance of <code>VBKA.ACCOUNT</code>
      */
     public static final Account ACCOUNT = new Account();
 
@@ -50,9 +52,14 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.ACCOUNT.IBAN</code>.
+     * The column <code>VBKA.ACCOUNT.IBAN</code>.
      */
     public final TableField<AccountRecord, String> IBAN = createField(DSL.name("IBAN"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>VBKA.ACCOUNT.FK_USER</code>.
+     */
+    public final TableField<AccountRecord, Integer> FK_USER = createField(DSL.name("FK_USER"), SQLDataType.INTEGER.nullable(false), this, "");
 
     private Account(Name alias, Table<AccountRecord> aliased) {
         this(alias, aliased, null);
@@ -63,21 +70,21 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     /**
-     * Create an aliased <code>PUBLIC.ACCOUNT</code> table reference
+     * Create an aliased <code>VBKA.ACCOUNT</code> table reference
      */
     public Account(String alias) {
         this(DSL.name(alias), ACCOUNT);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.ACCOUNT</code> table reference
+     * Create an aliased <code>VBKA.ACCOUNT</code> table reference
      */
     public Account(Name alias) {
         this(alias, ACCOUNT);
     }
 
     /**
-     * Create a <code>PUBLIC.ACCOUNT</code> table reference
+     * Create a <code>VBKA.ACCOUNT</code> table reference
      */
     public Account() {
         this(DSL.name("ACCOUNT"), null);
@@ -89,12 +96,29 @@ public class Account extends TableImpl<AccountRecord> {
 
     @Override
     public Schema getSchema() {
-        return aliased() ? null : Public.PUBLIC;
+        return aliased() ? null : Vbka.VBKA;
     }
 
     @Override
     public UniqueKey<AccountRecord> getPrimaryKey() {
         return Keys.CONSTRAINT_E;
+    }
+
+    @Override
+    public List<ForeignKey<AccountRecord, ?>> getReferences() {
+        return Arrays.asList(Keys.CONSTRAINT_E4);
+    }
+
+    private transient UserTable _userTable;
+
+    /**
+     * Get the implicit join path to the <code>VBKA.USER_TABLE</code> table.
+     */
+    public UserTable userTable() {
+        if (_userTable == null)
+            _userTable = new UserTable(this, Keys.CONSTRAINT_E4);
+
+        return _userTable;
     }
 
     @Override
@@ -137,18 +161,18 @@ public class Account extends TableImpl<AccountRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row1 type methods
+    // Row2 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row1<String> fieldsRow() {
-        return (Row1) super.fieldsRow();
+    public Row2<String, Integer> fieldsRow() {
+        return (Row2) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function1<? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function2<? super String, ? super Integer, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -156,7 +180,7 @@ public class Account extends TableImpl<AccountRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function1<? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super String, ? super Integer, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

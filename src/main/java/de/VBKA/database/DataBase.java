@@ -28,7 +28,7 @@ public class DataBase {
             ds.setPassword(pass);
 
             Connection connection = DriverManager.getConnection(url, name, pass);
-            //RunScript.execute(connection, new FileReader("src/main/java/de/VBKA/database/db.sql"));
+            RunScript.execute(connection, new FileReader("src/main/java/de/VBKA/database/db.sql"));
             db = DSL.using(connection, SQLDialect.H2);
             //DataBase.db.dropTableIfExists("ACCOUNT");
             //var r = DataBase.db.dropTableIfExists("ACCOUNT").execute();

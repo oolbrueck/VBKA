@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <configuration>
-    
+
     <jdbc>
         <driver>org.h2.Driver</driver>
         <url>jdbc:h2:./h2db</url>
@@ -13,7 +13,7 @@
 
         <database>
             <name>org.jooq.meta.h2.H2Database</name>
-            <inputSchema>PUBLIC</inputSchema>
+            <inputSchema>VBKA</inputSchema>
             <includes>.*</includes>
             <excludes></excludes>
             <properties>
