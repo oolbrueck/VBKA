@@ -1,4 +1,4 @@
-package de.VBKA.database.dao;
+package de.VBKA.backend.dao;
 
 import de.VBKA.backend.entity.Booking;
 

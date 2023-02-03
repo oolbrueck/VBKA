@@ -1,14 +1,11 @@
 package de.VBKA.backend.controller;
 
-import de.VBKA.backend.entity.BankAccount;
 import de.VBKA.backend.entity.Booking;
-import de.VBKA.backend.entity.Category;
-import de.VBKA.database.dao.BookingDAO;
+import de.VBKA.backend.dao.BookingDAO;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ImportBankStatementController {
 

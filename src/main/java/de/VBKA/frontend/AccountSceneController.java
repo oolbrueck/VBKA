@@ -2,8 +2,8 @@ package de.VBKA.frontend;
 
 import de.VBKA.backend.controller.SessionController;
 import de.VBKA.backend.entity.BankAccount;
-import de.VBKA.database.dao.AccountDAO;
-import de.VBKA.database.de_2fVBKA_2fdatabase.tables.records.AccountRecord;
+//import de.VBKA.database.dao.AccountDAO;
+//import de.VBKA.database.de_2fVBKA_2fdatabase.tables.records.AccountRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,13 +37,13 @@ public class AccountSceneController implements Initializable {
 
         Optional<String> result = textInputDialog.showAndWait();
         System.out.println(result.get());
-        new AccountDAO().createAccount(new AccountRecord(result.get())); //TODO is present check
+        //new AccountDAO().createAccount(new AccountRecord(result.get())); //TODO is present check
         updateAccountList();
     }
 
     public void deleteAccount(ActionEvent event) {
         System.out.println("delete");
-        new AccountDAO().deleteAccount(new AccountRecord(listOfAccounts.getSelectionModel().getSelectedItem()));
+        //new AccountDAO().deleteAccount(new AccountRecord(listOfAccounts.getSelectionModel().getSelectedItem()));
         updateAccountList();
     }
 
@@ -55,7 +55,7 @@ public class AccountSceneController implements Initializable {
 
     private void updateAccountList() {
         listOfAccounts.getItems().clear();
-        listOfAccounts.getItems().addAll(new AccountDAO().readAllAccounts()
-                .stream().map(AccountRecord::getIban).toList());
+        //listOfAccounts.getItems().addAll(new AccountDAO().readAllAccounts()
+        //        .stream().map(AccountRecord::getIban).toList());
     }
 }

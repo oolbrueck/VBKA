@@ -1,12 +1,11 @@
-package de.VBKA.database.dao;
+package de.VBKA.backend.dao;
 
 import de.VBKA.database.DataBase;
-import de.VBKA.database.de_2fVBKA_2fdatabase.tables.Account;
-import de.VBKA.database.de_2fVBKA_2fdatabase.tables.records.AccountRecord;
+import de.VBKA.database.jooq.tables.records.AccountRecord;
 
 import java.util.List;
 
-import static de.VBKA.database.de_2fVBKA_2fdatabase.tables.Account.ACCOUNT;
+import static de.VBKA.database.jooq.tables.Account.ACCOUNT;
 
 
 public class AccountDAO {

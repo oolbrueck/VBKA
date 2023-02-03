@@ -25,8 +25,8 @@
         </database>
 
         <target>
-            <packageName>de/VBKA/database</packageName>
-            <directory>de.VBKA.database</directory>
+            <packageName>de.VBKA.database.jooq</packageName>
+            <directory>src/main/java</directory>
         </target>
     </generator>
 </configuration>
