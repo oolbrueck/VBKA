@@ -1,5 +1,7 @@
-package de.VBKA.backend.controller;
+package de.VBKA.backend.controller.bankStatementParser.bookingParserImpl;
 
+import de.VBKA.backend.controller.bankStatementParser.BookingParser;
+import de.VBKA.backend.entity.Booking;
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.io.RandomAccessFile;
 import org.apache.pdfbox.pdfparser.PDFParser;
@@ -13,11 +15,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BookingParseController {
+public class VolksbankParser implements BookingParser {
 
     String fileName = "C:/Users/oligo/Desktop/2408043010_2022_Nr.010_Kontoauszug_vom_31.10.2022_20221111203727.pdf";
 
-    public List<String> parseBookings(File file) throws IOException {
+    public List<Booking> parseBookings(File file) throws IOException {
         //File f = new File(fileName);
         String parsedText;
         PDFParser parser = new PDFParser(new RandomAccessFile(file, "r"));
@@ -53,7 +55,7 @@ public class BookingParseController {
 //                        .trim().replaceAll(",", ".")).filter(s -> !s.equals(""))
 //                .map(Double::parseDouble).reduce(0.0, (a, b) -> a + b));
 
-        return listOfParsedBookings;
+        return listOfParsedBookings.stream().map(b -> new Booking()); //TODO
     }
 
     public Double parseAmount(String parsedBooking) {

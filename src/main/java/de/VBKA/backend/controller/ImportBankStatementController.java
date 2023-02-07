@@ -1,5 +1,6 @@
 package de.VBKA.backend.controller;
 
+import de.VBKA.backend.controller.bankStatementParser.bookingParserImpl.VolksbankParser;
 import de.VBKA.backend.entity.Booking;
 import de.VBKA.backend.dao.BookingDAO;
 
@@ -21,7 +22,7 @@ public class ImportBankStatementController {
 
     private Booking stringBookingToObjectBooking(String bookingAsString) {
         Booking booking = new Booking();
-        booking.setAmount(new BookingParseController().parseAmount(bookingAsString));
+        booking.setAmount(new VolksbankParser().parseAmount(bookingAsString));
         booking.setBankAccount(new SessionController().getCurrentBankAccount());
         booking.setBookedText(bookingAsString);
         new ApplyCategorizationController()
@@ -32,7 +33,7 @@ public class ImportBankStatementController {
     private List<String> getBookingsAsString(File file) {
         List<String> result;
         try {
-            result = new BookingParseController().parseBookings(file);
+            result = new VolksbankParser().parseBookings(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

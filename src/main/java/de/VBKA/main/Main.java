@@ -1,6 +1,5 @@
 package de.VBKA.main;
 
-import de.VBKA.backend.controller.BookingParseController;
 import de.VBKA.database.DataBase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class Main extends Application {
     public static void main(String[] args) {
