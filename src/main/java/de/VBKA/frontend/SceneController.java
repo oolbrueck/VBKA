@@ -21,13 +21,13 @@ public class SceneController {
         return 0;
     }
 
-    public int switchToMainMenue(ActionEvent event) {
-        switchScene(event, "/MainMenueScene.fxml");
+    public int switchToDashboard(ActionEvent event) {
+        switchScene(event, "/Dashboard.fxml");
         return 0;
     }
 
     public int switchToBankStatementUpload(ActionEvent event) {
-        switchScene(event, "/MainMenueScene.fxml");
+        switchScene(event, "/BankStatementUploadScene.fxml");
         return 0;
     }
 

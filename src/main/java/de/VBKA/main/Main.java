@@ -22,7 +22,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/AccountScene.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/Dashboard.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

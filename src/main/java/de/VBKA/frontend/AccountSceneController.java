@@ -49,7 +49,7 @@ public class AccountSceneController implements Initializable {
 
     public void inspectAccount(ActionEvent event) {
         System.out.println("inspect " + listOfAccounts.getSelectionModel().getSelectedItem());
-        new SceneController().switchToMainMenue(event);
+        new SceneController().switchToDashboard(event);
         new SessionController().setCurrentBankAccount(new BankAccount(listOfAccounts.getSelectionModel().getSelectedItem()));
     }
 

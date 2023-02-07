@@ -23,7 +23,7 @@ public class BankStatementUploadSceneController {
     }
 
     public int goBackToMenue(ActionEvent event) {
-        new SceneController().switchToMainMenue(event);
+        new SceneController().switchToDashboard(event);
         return 0;
     }
 }
