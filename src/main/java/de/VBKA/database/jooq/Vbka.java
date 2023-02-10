@@ -5,6 +5,7 @@ package de.VBKA.database.jooq;
 
 
 import de.VBKA.database.jooq.tables.Account;
+import de.VBKA.database.jooq.tables.BankStatement;
 import de.VBKA.database.jooq.tables.Booking;
 import de.VBKA.database.jooq.tables.BookingRCategory;
 import de.VBKA.database.jooq.tables.Category;
@@ -38,6 +39,11 @@ public class Vbka extends SchemaImpl {
      * The table <code>VBKA.ACCOUNT</code>.
      */
     public final Account ACCOUNT = Account.ACCOUNT;
+
+    /**
+     * The table <code>VBKA.BANK_STATEMENT</code>.
+     */
+    public final BankStatement BANK_STATEMENT = BankStatement.BANK_STATEMENT;
 
     /**
      * The table <code>VBKA.BOOKING</code>.
@@ -91,6 +97,7 @@ public class Vbka extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             Account.ACCOUNT,
+            BankStatement.BANK_STATEMENT,
             Booking.BOOKING,
             BookingRCategory.BOOKING_R_CATEGORY,
             Category.CATEGORY,

@@ -10,10 +10,12 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class VolksbankParser implements BookingParser {
 
@@ -49,16 +51,13 @@ public class VolksbankParser implements BookingParser {
             }
             listOfParsedBookings.add(parsedText.substring(listOfIndices.get(i), listOfIndices.get(i + 1)));
         }
-//        System.out.println(listOfParsedBookings.toString());
-//        System.out.println(listOfParsedBookings.size());
-//        System.out.println(listOfParsedBookings.stream().map(s -> s.substring(50, 90).replaceAll("S", "")
-//                        .trim().replaceAll(",", ".")).filter(s -> !s.equals(""))
-//                .map(Double::parseDouble).reduce(0.0, (a, b) -> a + b));
 
-        return listOfParsedBookings.stream().map(b -> new Booking()); //TODO
+        return listOfParsedBookings.stream().map(bookingAsString ->
+                new Booking(null, parseBookingDate(bookingAsString), bookingAsString, parseAmount(bookingAsString), null, null))
+                .collect(Collectors.toList()); //TODO
     }
 
-    public Double parseAmount(String parsedBooking) {
+    private int parseAmount(String parsedBooking) {
 
         var stringFragments = parsedBooking.split("\\R")[0].split("             ");
         var amountAsString = stringFragments[stringFragments.length - 1]
@@ -66,9 +65,11 @@ public class VolksbankParser implements BookingParser {
         var amountAsDouble = amountAsString.contains("S") ?
                                     -1 * Double.parseDouble(amountAsString.substring(0, amountAsString.length() - 2)) :
                                     Double.parseDouble(amountAsString.substring(0, amountAsString.length() - 2));
-        System.out.println(amountAsString);
-        System.out.println(amountAsDouble);
-        return 0.0;
+        return (int)((amountAsDouble - (int)amountAsDouble) * 100) + ((int)amountAsDouble) * 100;
+    }
 
+    private LocalDate parseBookingDate(String parsedBooking) {
+        System.out.println(parsedBooking);
+        return LocalDate.of(2022, 1, 1); //TODO
     }
 }

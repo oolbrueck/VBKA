@@ -16,7 +16,7 @@ public class Booking {
     private UUID id;
     private LocalDate bookedDate;
     private String bookedText;
-    private Double amount;
+    private int amountInCents;
     private List<Category> categories;
     private BankAccount bankAccount;
 

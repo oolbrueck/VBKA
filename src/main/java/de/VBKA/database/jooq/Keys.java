@@ -5,6 +5,7 @@ package de.VBKA.database.jooq;
 
 
 import de.VBKA.database.jooq.tables.Account;
+import de.VBKA.database.jooq.tables.BankStatement;
 import de.VBKA.database.jooq.tables.Booking;
 import de.VBKA.database.jooq.tables.BookingRCategory;
 import de.VBKA.database.jooq.tables.Category;
@@ -13,6 +14,7 @@ import de.VBKA.database.jooq.tables.CategoryMatcherRCategory;
 import de.VBKA.database.jooq.tables.CategoryRCategory;
 import de.VBKA.database.jooq.tables.UserTable;
 import de.VBKA.database.jooq.tables.records.AccountRecord;
+import de.VBKA.database.jooq.tables.records.BankStatementRecord;
 import de.VBKA.database.jooq.tables.records.BookingRCategoryRecord;
 import de.VBKA.database.jooq.tables.records.BookingRecord;
 import de.VBKA.database.jooq.tables.records.CategoryMatcherRCategoryRecord;
@@ -40,6 +42,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<AccountRecord> CONSTRAINT_E = Internal.createUniqueKey(Account.ACCOUNT, DSL.name("CONSTRAINT_E"), new TableField[] { Account.ACCOUNT.IBAN }, true);
+    public static final UniqueKey<BankStatementRecord> CONSTRAINT_92 = Internal.createUniqueKey(BankStatement.BANK_STATEMENT, DSL.name("CONSTRAINT_92"), new TableField[] { BankStatement.BANK_STATEMENT.ID }, true);
     public static final UniqueKey<BookingRecord> CONSTRAINT_2 = Internal.createUniqueKey(Booking.BOOKING, DSL.name("CONSTRAINT_2"), new TableField[] { Booking.BOOKING.ID }, true);
     public static final UniqueKey<BookingRCategoryRecord> CONSTRAINT_6 = Internal.createUniqueKey(BookingRCategory.BOOKING_R_CATEGORY, DSL.name("CONSTRAINT_6"), new TableField[] { BookingRCategory.BOOKING_R_CATEGORY.FK_BOOKING, BookingRCategory.BOOKING_R_CATEGORY.FK_CATEGORY }, true);
     public static final UniqueKey<CategoryRecord> CONSTRAINT_3 = Internal.createUniqueKey(Category.CATEGORY, DSL.name("CONSTRAINT_3"), new TableField[] { Category.CATEGORY.ID }, true);
