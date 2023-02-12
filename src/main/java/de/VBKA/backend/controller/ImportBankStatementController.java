@@ -1,6 +1,7 @@
 package de.VBKA.backend.controller;
 
-import de.VBKA.backend.controller.bankStatementParser.bookingParserImpl.VolksbankParser;
+import de.VBKA.backend.controller.bankStatementParser.bookingParserImpl.pdfParser.VolksbankPdfParser;
+import de.VBKA.backend.controller.bankStatementParser.csvParser.VolksbankCSVParser;
 import de.VBKA.backend.entity.Booking;
 import de.VBKA.backend.dao.BookingDAO;
 
@@ -27,7 +28,7 @@ public class ImportBankStatementController {
     private List<Booking> getBookings(File file) {
         List<Booking> result;
         try {
-            result = new VolksbankParser().parseBookings(file);
+            result = new VolksbankCSVParser().parseBookings(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

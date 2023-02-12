@@ -1,6 +1,7 @@
 package de.VBKA.frontend;
 
-import de.VBKA.backend.controller.bankStatementParser.bookingParserImpl.VolksbankParser;
+import de.VBKA.backend.controller.bankStatementParser.bookingParserImpl.pdfParser.VolksbankPdfParser;
+import de.VBKA.backend.controller.bankStatementParser.csvParser.VolksbankCSVParser;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 
@@ -13,7 +14,7 @@ public class BankStatementUploadSceneController {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
         try {
-            new VolksbankParser().parseBookings(file);
+            new VolksbankCSVParser().parseBookings(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

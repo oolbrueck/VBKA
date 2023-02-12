@@ -1,4 +1,4 @@
-package de.VBKA.backend.controller.bankStatementParser.bookingParserImpl;
+package de.VBKA.backend.controller.bankStatementParser.bookingParserImpl.pdfParser;
 
 import de.VBKA.backend.controller.bankStatementParser.BookingParser;
 import de.VBKA.backend.entity.Booking;
@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class VolksbankParser implements BookingParser {
+public class VolksbankPdfParser implements BookingParser {
 
     String fileName = "C:/Users/oligo/Desktop/2408043010_2022_Nr.010_Kontoauszug_vom_31.10.2022_20221111203727.pdf";
 
@@ -29,12 +29,14 @@ public class VolksbankParser implements BookingParser {
 
         COSDocument cosDoc = parser.getDocument();
         PDFTextStripper pdfStripper = new PDFTextStripper();
+        pdfStripper.setSortByPosition(true);
         PDDocument pdDoc = new PDDocument(cosDoc);
         parsedText = pdfStripper.getText(pdDoc);
 
         //TODO pdf doc closen siehe Warnung
 
         var listOfIndices = new ArrayList<Integer>();
+        System.out.println(parsedText);
 
         parsedText = parsedText.replaceAll("                                            Übertrag auf Blatt", "00.00. 00.00. ")
                 .replaceAll("                                    neuer Kontostand vom", "00.00. 00.00. ");
@@ -51,9 +53,10 @@ public class VolksbankParser implements BookingParser {
             }
             listOfParsedBookings.add(parsedText.substring(listOfIndices.get(i), listOfIndices.get(i + 1)));
         }
+        int year = 2022;
 
         return listOfParsedBookings.stream().map(bookingAsString ->
-                new Booking(null, parseBookingDate(bookingAsString), bookingAsString, parseAmount(bookingAsString), null, null))
+                new Booking(null, parseBookingDate(bookingAsString, year), bookingAsString, parseAmount(bookingAsString), null, null))
                 .collect(Collectors.toList()); //TODO
     }
 
@@ -68,7 +71,7 @@ public class VolksbankParser implements BookingParser {
         return (int)((amountAsDouble - (int)amountAsDouble) * 100) + ((int)amountAsDouble) * 100;
     }
 
-    private LocalDate parseBookingDate(String parsedBooking) {
+    private LocalDate parseBookingDate(String parsedBooking, int year) {
         System.out.println(parsedBooking);
         return LocalDate.of(2022, 1, 1); //TODO
     }
