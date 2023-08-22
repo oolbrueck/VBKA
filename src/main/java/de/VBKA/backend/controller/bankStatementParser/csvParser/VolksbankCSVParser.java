@@ -23,6 +23,10 @@ public class VolksbankCSVParser implements BookingParser {
             throw new RuntimeException(e);
         }
         records.forEach(r -> System.out.println(r));
+        records.get(0).forEach(System.out::println);
+
+        //records.stream().map(b -> new Booking(Null, b.get(4), b.get()))
+
 
         return new ArrayList<>();
     }

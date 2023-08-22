@@ -94,7 +94,7 @@ public class CategoryMatcher extends TableImpl<CategoryMatcherRecord> {
 
     @Override
     public UniqueKey<CategoryMatcherRecord> getPrimaryKey() {
-        return Keys.CONSTRAINT_9;
+        return Keys.CONSTRAINT_99;
     }
 
     @Override

@@ -15,11 +15,11 @@ import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function5;
+import org.jooq.Function6;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row5;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -61,6 +61,11 @@ public class Booking extends TableImpl<BookingRecord> {
      * The column <code>VBKA.BOOKING.FK_ACCOUNT</code>.
      */
     public final TableField<BookingRecord, String> FK_ACCOUNT = createField(DSL.name("FK_ACCOUNT"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>VBKA.BOOKING.FK_BANK_STATEMENT</code>.
+     */
+    public final TableField<BookingRecord, Integer> FK_BANK_STATEMENT = createField(DSL.name("FK_BANK_STATEMENT"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>VBKA.BOOKING.BOOKING_DATE</code>.
@@ -122,10 +127,11 @@ public class Booking extends TableImpl<BookingRecord> {
 
     @Override
     public List<ForeignKey<BookingRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.CONSTRAINT_2E);
+        return Arrays.asList(Keys.CONSTRAINT_2E, Keys.CONSTRAINT_2EA);
     }
 
     private transient Account _account;
+    private transient BankStatement _bankStatement;
 
     /**
      * Get the implicit join path to the <code>VBKA.ACCOUNT</code> table.
@@ -135,6 +141,16 @@ public class Booking extends TableImpl<BookingRecord> {
             _account = new Account(this, Keys.CONSTRAINT_2E);
 
         return _account;
+    }
+
+    /**
+     * Get the implicit join path to the <code>VBKA.BANK_STATEMENT</code> table.
+     */
+    public BankStatement bankStatement() {
+        if (_bankStatement == null)
+            _bankStatement = new BankStatement(this, Keys.CONSTRAINT_2EA);
+
+        return _bankStatement;
     }
 
     @Override
@@ -177,18 +193,18 @@ public class Booking extends TableImpl<BookingRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, String, LocalDate, Integer, String> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row6<Integer, String, Integer, LocalDate, Integer, String> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super Integer, ? super String, ? super LocalDate, ? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function6<? super Integer, ? super String, ? super Integer, ? super LocalDate, ? super Integer, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -196,7 +212,7 @@ public class Booking extends TableImpl<BookingRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super String, ? super LocalDate, ? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super Integer, ? super String, ? super Integer, ? super LocalDate, ? super Integer, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

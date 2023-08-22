@@ -10,5 +10,6 @@
       <Button fx:id="addAccount" layoutX="438.0" layoutY="79.0" mnemonicParsing="false" onAction="#addAccount" text="Account hinzufügen" />
       <Button fx:id="deleteAccount" layoutX="438.0" layoutY="131.0" mnemonicParsing="false" onAction="#deleteAccount" text="Account löschen" />
       <Button fx:id="inspectAccount" layoutX="438.0" layoutY="185.0" mnemonicParsing="false" onAction="#inspectAccount" text="inspizieren" />
+      <Button layoutX="438.0" layoutY="235.0" mnemonicParsing="false" onAction="#goBackToMenue" text="zum Menu" />
    </children>
 </AnchorPane>

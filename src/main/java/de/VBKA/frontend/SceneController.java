@@ -17,7 +17,6 @@ public class SceneController {
 
     public int switchToAccountScene(ActionEvent event) {
         switchScene(event, "/AccountScene.fxml");
-        new SessionController().setCurrentBankAccount(null);
         return 0;
     }
 

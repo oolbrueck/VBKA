@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 
 public class DataBase {
 
@@ -26,19 +27,11 @@ public class DataBase {
             ds.setURL(url);
             ds.setUser(name);
             ds.setPassword(pass);
+            System.out.println("Werde ich überhaupt ausgeführt ?");
 
             Connection connection = DriverManager.getConnection(url, name, pass);
             RunScript.execute(connection, new FileReader("src/main/java/de/VBKA/database/db.sql"));
             db = DSL.using(connection, SQLDialect.H2);
-            //DataBase.db.dropTableIfExists("ACCOUNT");
-            //var r = DataBase.db.dropTableIfExists("ACCOUNT").execute();
-            //RunScript.execute(connection, new FileReader("src/main/java/de/VBKA/database/db.sql"));
-
-//            GenerationTool.generate(
-//                    Files.readString(
-//                            Path.of("src/main/java/de/VBKA/database/jooq-config.xml")
-//                    )
-//            );
         } catch (Exception e) {
             e.printStackTrace();
             return false;

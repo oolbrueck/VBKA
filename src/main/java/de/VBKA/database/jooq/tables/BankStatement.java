@@ -105,7 +105,7 @@ public class BankStatement extends TableImpl<BankStatementRecord> {
 
     @Override
     public UniqueKey<BankStatementRecord> getPrimaryKey() {
-        return Keys.CONSTRAINT_92;
+        return Keys.CONSTRAINT_9;
     }
 
     @Override

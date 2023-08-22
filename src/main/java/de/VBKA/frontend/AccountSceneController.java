@@ -1,9 +1,12 @@
 package de.VBKA.frontend;
 
 import de.VBKA.backend.controller.SessionController;
+import de.VBKA.backend.dao.AccountDAO;
+import de.VBKA.backend.dao.UserDAO;
 import de.VBKA.backend.entity.BankAccount;
 //import de.VBKA.database.dao.AccountDAO;
 //import de.VBKA.database.de_2fVBKA_2fdatabase.tables.records.AccountRecord;
+import de.VBKA.database.jooq.tables.records.AccountRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,9 +38,21 @@ public class AccountSceneController implements Initializable {
         textInputDialog.setContentText("Iban ");
         textInputDialog.getDialogPane().setMinWidth(300);
 
-        Optional<String> result = textInputDialog.showAndWait();
-        System.out.println(result.get());
-        //new AccountDAO().createAccount(new AccountRecord(result.get())); //TODO is present check
+        String ibanFromInput = textInputDialog.showAndWait().get();
+        System.out.println(ibanFromInput);
+
+        var allAccounts = new AccountDAO().readAllAccounts();
+        for(AccountRecord accountRecord : allAccounts) {
+            if(accountRecord.getIban().equals(ibanFromInput)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Account Management");
+                alert.setContentText("Konto mit der Iban " + ibanFromInput + " bereits im System");
+                alert.showAndWait();
+                break;
+            }
+        }
+
+        new AccountDAO().createAccount(new AccountRecord(ibanFromInput, new UserDAO().getUserId(SessionController.getCurrentUser())));
         updateAccountList();
     }
 
@@ -57,5 +72,9 @@ public class AccountSceneController implements Initializable {
         listOfAccounts.getItems().clear();
         //listOfAccounts.getItems().addAll(new AccountDAO().readAllAccounts()
         //        .stream().map(AccountRecord::getIban).toList());
+    }
+
+    public void goBackToMenue(ActionEvent event) {
+        new SceneController().switchToDashboard(event);
     }
 }

@@ -9,4 +9,8 @@ public class DashboardSceneController {
     public void goToBankStatementUpload(ActionEvent event) {
         new SceneController().switchToBankStatementUpload(event);
     }
+
+    public void goToAccountScene(ActionEvent event) {
+        new SceneController().switchToAccountScene(event);
+    }
 }
