@@ -44,4 +44,9 @@ public class SceneController {
 
         return 0;
     }
+
+    public int switchToUserScene(ActionEvent event) {
+        switchScene(event, "/UserScene.fxml");
+        return 0;
+    }
 }

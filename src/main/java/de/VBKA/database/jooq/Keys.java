@@ -49,13 +49,13 @@ public class Keys {
     public static final UniqueKey<CategoryMatcherRecord> CONSTRAINT_99 = Internal.createUniqueKey(CategoryMatcher.CATEGORY_MATCHER, DSL.name("CONSTRAINT_99"), new TableField[] { CategoryMatcher.CATEGORY_MATCHER.MATCHING_WORD }, true);
     public static final UniqueKey<CategoryMatcherRCategoryRecord> CONSTRAINT_D = Internal.createUniqueKey(CategoryMatcherRCategory.CATEGORY_MATCHER_R_CATEGORY, DSL.name("CONSTRAINT_D"), new TableField[] { CategoryMatcherRCategory.CATEGORY_MATCHER_R_CATEGORY.FK_CATEGORY, CategoryMatcherRCategory.CATEGORY_MATCHER_R_CATEGORY.FK_CATEGORY_MATCHER }, true);
     public static final UniqueKey<CategoryRCategoryRecord> CONSTRAINT_6A = Internal.createUniqueKey(CategoryRCategory.CATEGORY_R_CATEGORY, DSL.name("CONSTRAINT_6A"), new TableField[] { CategoryRCategory.CATEGORY_R_CATEGORY.FK_PARENT_CATEGORY, CategoryRCategory.CATEGORY_R_CATEGORY.FK_CHILD_CATEGORY }, true);
-    public static final UniqueKey<UserTableRecord> CONSTRAINT_C = Internal.createUniqueKey(UserTable.USER_TABLE, DSL.name("CONSTRAINT_C"), new TableField[] { UserTable.USER_TABLE.ID }, true);
+    public static final UniqueKey<UserTableRecord> CONSTRAINT_C = Internal.createUniqueKey(UserTable.USER_TABLE, DSL.name("CONSTRAINT_C"), new TableField[] { UserTable.USER_TABLE.NAME }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<AccountRecord, UserTableRecord> CONSTRAINT_E4 = Internal.createForeignKey(Account.ACCOUNT, DSL.name("CONSTRAINT_E4"), new TableField[] { Account.ACCOUNT.FK_USER }, Keys.CONSTRAINT_C, new TableField[] { UserTable.USER_TABLE.ID }, true);
+    public static final ForeignKey<AccountRecord, UserTableRecord> CONSTRAINT_E4 = Internal.createForeignKey(Account.ACCOUNT, DSL.name("CONSTRAINT_E4"), new TableField[] { Account.ACCOUNT.FK_USER }, Keys.CONSTRAINT_C, new TableField[] { UserTable.USER_TABLE.NAME }, true);
     public static final ForeignKey<BookingRecord, AccountRecord> CONSTRAINT_2E = Internal.createForeignKey(Booking.BOOKING, DSL.name("CONSTRAINT_2E"), new TableField[] { Booking.BOOKING.FK_ACCOUNT }, Keys.CONSTRAINT_E, new TableField[] { Account.ACCOUNT.IBAN }, true);
     public static final ForeignKey<BookingRecord, BankStatementRecord> CONSTRAINT_2EA = Internal.createForeignKey(Booking.BOOKING, DSL.name("CONSTRAINT_2EA"), new TableField[] { Booking.BOOKING.FK_BANK_STATEMENT }, Keys.CONSTRAINT_9, new TableField[] { BankStatement.BANK_STATEMENT.ID }, true);
     public static final ForeignKey<BookingRCategoryRecord, BookingRecord> CONSTRAINT_6F = Internal.createForeignKey(BookingRCategory.BOOKING_R_CATEGORY, DSL.name("CONSTRAINT_6F"), new TableField[] { BookingRCategory.BOOKING_R_CATEGORY.FK_BOOKING }, Keys.CONSTRAINT_2, new TableField[] { Booking.BOOKING.ID }, true);

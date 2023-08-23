@@ -13,4 +13,8 @@ public class DashboardSceneController {
     public void goToAccountScene(ActionEvent event) {
         new SceneController().switchToAccountScene(event);
     }
+
+    public void goToUserScene(ActionEvent event) {
+        new SceneController().switchToUserScene(event);
+    }
 }

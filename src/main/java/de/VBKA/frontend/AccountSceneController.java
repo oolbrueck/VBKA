@@ -52,7 +52,7 @@ public class AccountSceneController implements Initializable {
             }
         }
 
-        new AccountDAO().createAccount(new AccountRecord(ibanFromInput, new UserDAO().getUserId(SessionController.getCurrentUser())));
+        new AccountDAO().createAccount(new AccountRecord(ibanFromInput, SessionController.getCurrentUser()));
         updateAccountList();
     }
 

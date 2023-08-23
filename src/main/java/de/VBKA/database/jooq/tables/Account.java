@@ -59,7 +59,7 @@ public class Account extends TableImpl<AccountRecord> {
     /**
      * The column <code>VBKA.ACCOUNT.FK_USER</code>.
      */
-    public final TableField<AccountRecord, Integer> FK_USER = createField(DSL.name("FK_USER"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<AccountRecord, String> FK_USER = createField(DSL.name("FK_USER"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     private Account(Name alias, Table<AccountRecord> aliased) {
         this(alias, aliased, null);
@@ -165,14 +165,14 @@ public class Account extends TableImpl<AccountRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<String, Integer> fieldsRow() {
+    public Row2<String, String> fieldsRow() {
         return (Row2) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super String, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function2<? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -180,7 +180,7 @@ public class Account extends TableImpl<AccountRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super String, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

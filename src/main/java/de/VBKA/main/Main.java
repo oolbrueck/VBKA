@@ -20,7 +20,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/Dashboard.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/UserScene.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
