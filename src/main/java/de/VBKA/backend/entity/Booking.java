@@ -24,5 +24,19 @@ public class Booking {
     private int balanceAfterBooking;
     private List<Category> categories;
 
-
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", bankAccount=" + bankAccount +
+                ", bookedDate=" + bookedDate +
+                ", paymentParty='" + paymentParty + '\'' +
+                ", bankAccountPaymentParty=" + bankAccountPaymentParty +
+                ", bookingType='" + bookingType + '\'' +
+                ", purposeOfUse='" + purposeOfUse + '\'' +
+                ", amountInCents=" + amountInCents +
+                ", balanceAfterBooking=" + balanceAfterBooking +
+                ", categories=" + categories +
+                '}';
+    }
 }

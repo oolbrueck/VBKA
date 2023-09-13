@@ -6,7 +6,6 @@ package de.VBKA.frontend;
 
 import de.VBKA.backend.controller.SessionController;
 import de.VBKA.backend.dao.UserDAO;
-import de.VBKA.backend.entity.BankAccount;
 import de.VBKA.database.jooq.tables.records.UserTableRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -8,7 +8,7 @@ public class ApplyCategorizationController {
     public void categorize(Booking booking) {
         booking.getBankAccount().getCategories().forEach(category -> category.getStringPatterns().forEach(
                 stringPattern -> {
-                    if(booking.getBookedText().contains(stringPattern)) {
+                    if(booking.getPurposeOfUse().contains(stringPattern) || booking.getBookingType().contains(stringPattern)) {
                         booking.getCategories().add(category);
                     }
                 }

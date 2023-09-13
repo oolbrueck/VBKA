@@ -18,10 +18,14 @@ public class VolksbankCSVParser extends BookingParser {
             Scanner scanner = new Scanner(file);
             boolean headerIgnored = false;
             while (scanner.hasNextLine()) {
+                List<String> bookingInformation = getRecordFromLine(scanner.nextLine());
+                System.out.println("Test1");
                 if(!headerIgnored) {
+                    System.out.println("Test2");
                     headerIgnored = true;
                 } else {
-                    List<String> bookingInformation = getRecordFromLine(scanner.nextLine());
+                    System.out.println("Test3");
+                    System.out.println("bookingInformation: " + bookingInformation);
                     Booking booking = new Booking();
                     booking.setBankAccount(new BankAccount(bookingInformation.get(1)));
                     booking.setBookedDate(Utils.ddMmYyyyToLocalDate(bookingInformation.get(4)));
@@ -42,8 +46,9 @@ public class VolksbankCSVParser extends BookingParser {
         this.bankAccount = orderAccount;
     }
 
+    @Override
     public List<Booking> getBookings() {
-        return this.getBookings().isEmpty() ? new ArrayList<>() : this.getBookings();
+        return this.bookings.isEmpty() ? new ArrayList<>() : this.bookings;
     }
 
 
