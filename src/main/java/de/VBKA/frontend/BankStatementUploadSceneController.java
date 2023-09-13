@@ -14,7 +14,8 @@ public class BankStatementUploadSceneController {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
         try {
-            new VolksbankCSVParser().parseBookings(file);
+            var parser = new VolksbankCSVParser(file);
+            parser.getBookings();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,34 +1,54 @@
 package de.VBKA.backend.controller.bankStatementParser.csvParser;
 
+import de.VBKA.Utils;
 import de.VBKA.backend.controller.bankStatementParser.BookingParser;
+import de.VBKA.backend.entity.BankAccount;
 import de.VBKA.backend.entity.Booking;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-public class VolksbankCSVParser implements BookingParser {
-    @Override
-    public List<Booking> parseBookings(File file) throws IOException {
+public class VolksbankCSVParser extends BookingParser {
 
-        List<List<String>> records = new ArrayList<>();
+    public VolksbankCSVParser(File file) {
+        super();
+        List<Booking> bookings = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(file);
+            boolean headerIgnored = false;
             while (scanner.hasNextLine()) {
-                records.add(getRecordFromLine(scanner.nextLine()));
+                if(!headerIgnored) {
+                    headerIgnored = true;
+                } else {
+                    List<String> bookingInformation = getRecordFromLine(scanner.nextLine());
+                    Booking booking = new Booking();
+                    booking.setBankAccount(new BankAccount(bookingInformation.get(1)));
+                    booking.setBookedDate(Utils.ddMmYyyyToLocalDate(bookingInformation.get(4)));
+                    booking.setPaymentParty(bookingInformation.get(6));
+                    booking.setBankAccountPaymentParty(new BankAccount(bookingInformation.get(7)));
+                    booking.setBookingType(bookingInformation.get(9));
+                    booking.setPurposeOfUse(bookingInformation.get(10));
+                    booking.setAmountInCents(Utils.amountStringToCent(bookingInformation.get(11)));
+                    booking.setBalanceAfterBooking(Utils.amountStringToCent(bookingInformation.get(13)));
+                    bookings.add(booking);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        records.forEach(r -> System.out.println(r));
-        records.get(0).forEach(System.out::println);
+        BankAccount orderAccount = bookings.isEmpty() ? null : bookings.get(0).getBankAccount();
+        this.bookings = bookings;
+        this.bankAccount = orderAccount;
+    }
 
-        //records.stream().map(b -> new Booking(Null, b.get(4), b.get()))
+    public List<Booking> getBookings() {
+        return this.getBookings().isEmpty() ? new ArrayList<>() : this.getBookings();
+    }
 
 
-        return new ArrayList<>();
+    public BankAccount getIbanThatBelongsToBankStatement() {
+        return this.bankAccount;
     }
 
     private List<String> getRecordFromLine(String line) {

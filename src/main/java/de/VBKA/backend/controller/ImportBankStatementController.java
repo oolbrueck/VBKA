@@ -26,12 +26,7 @@ public class ImportBankStatementController {
     }
 
     private List<Booking> getBookings(File file) {
-        List<Booking> result;
-        try {
-            result = new VolksbankCSVParser().parseBookings(file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return result;
+        var parser = new VolksbankCSVParser(file);
+        return parser.getBookings();
     }
 }

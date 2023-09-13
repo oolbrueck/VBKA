@@ -14,10 +14,15 @@ import java.util.UUID;
 public class Booking {
 
     private UUID id;
-    private LocalDate bookedDate;
-    private String bookedText;
-    private int amountInCents;
-    private List<Category> categories;
     private BankAccount bankAccount;
+    private LocalDate bookedDate;
+    private String paymentParty; //Zahlungsbeteiligter
+    private BankAccount bankAccountPaymentParty;
+    private String bookingType; //Buchungsart z.B. Kartenzahlung, Lohn/Gehalt/Rente, Basislastschrift etc.
+    private String purposeOfUse; //Verwendungszweck
+    private int amountInCents;
+    private int balanceAfterBooking;
+    private List<Category> categories;
+
 
 }
