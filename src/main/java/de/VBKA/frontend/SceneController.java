@@ -49,4 +49,9 @@ public class SceneController {
         switchScene(event, "/UserScene.fxml");
         return 0;
     }
+
+    public int switchToCategoryAddingScene(ActionEvent event) {
+        switchScene(event, "/CategoryAddingForm.fxml");
+        return 0;
+    }
 }

@@ -19,7 +19,7 @@
                   <Button mnemonicParsing="false" onAction="#goToBankStatementUpload" text="Kontoauszüge +" />
                   <Button mnemonicParsing="false" onAction="#goToAccountScene" text="Bankkonto +" />
                   <Button mnemonicParsing="false" onAction="#goToUserScene" text="Log out" />
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" onAction="#goToCategoryAdding" text="Kategorien +" />
                </children>
             </VBox>
          </left>

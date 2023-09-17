@@ -8,15 +8,17 @@ import de.VBKA.database.jooq.Keys;
 import de.VBKA.database.jooq.Vbka;
 import de.VBKA.database.jooq.tables.records.CategoryRecord;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function2;
+import org.jooq.Function3;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row2;
+import org.jooq.Row3;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -58,6 +60,11 @@ public class Category extends TableImpl<CategoryRecord> {
      * The column <code>VBKA.CATEGORY.NAME</code>.
      */
     public final TableField<CategoryRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+
+    /**
+     * The column <code>VBKA.CATEGORY.FK_USER</code>.
+     */
+    public final TableField<CategoryRecord, String> FK_USER = createField(DSL.name("FK_USER"), SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     private Category(Name alias, Table<CategoryRecord> aliased) {
         this(alias, aliased, null);
@@ -103,6 +110,23 @@ public class Category extends TableImpl<CategoryRecord> {
     }
 
     @Override
+    public List<ForeignKey<CategoryRecord, ?>> getReferences() {
+        return Arrays.asList(Keys.CONSTRAINT_31);
+    }
+
+    private transient UserTable _userTable;
+
+    /**
+     * Get the implicit join path to the <code>VBKA.USER_TABLE</code> table.
+     */
+    public UserTable userTable() {
+        if (_userTable == null)
+            _userTable = new UserTable(this, Keys.CONSTRAINT_31);
+
+        return _userTable;
+    }
+
+    @Override
     public Category as(String alias) {
         return new Category(DSL.name(alias), this);
     }
@@ -142,18 +166,18 @@ public class Category extends TableImpl<CategoryRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, String> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row3<Integer, String, String> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function3<? super Integer, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -161,7 +185,7 @@ public class Category extends TableImpl<CategoryRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Integer, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
