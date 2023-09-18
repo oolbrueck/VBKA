@@ -20,6 +20,7 @@
                   <Button mnemonicParsing="false" onAction="#goToAccountScene" text="Bankkonto +" />
                   <Button mnemonicParsing="false" onAction="#goToUserScene" text="Log out" />
                   <Button mnemonicParsing="false" onAction="#goToCategoryAdding" text="Kategorien +" />
+                  <Button mnemonicParsing="false" onAction="#goToCategoryOverview" text="Kategorien" />
                </children>
             </VBox>
          </left>

@@ -21,4 +21,6 @@ public class DashboardSceneController {
     public void goToCategoryAdding(ActionEvent event) {
         new SceneController().switchToCategoryAddingScene(event);
     }
+
+    public void goToCategoryOverview(ActionEvent event) { new SceneController().switchToCategoryScene(event); }
 }

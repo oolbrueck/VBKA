@@ -16,6 +16,7 @@ import java.util.function.Function;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function6;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -55,7 +56,7 @@ public class Booking extends TableImpl<BookingRecord> {
     /**
      * The column <code>VBKA.BOOKING.ID</code>.
      */
-    public final TableField<BookingRecord, Integer> ID = createField(DSL.name("ID"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<BookingRecord, Long> ID = createField(DSL.name("ID"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>VBKA.BOOKING.FK_ACCOUNT</code>.
@@ -65,7 +66,7 @@ public class Booking extends TableImpl<BookingRecord> {
     /**
      * The column <code>VBKA.BOOKING.FK_BANK_STATEMENT</code>.
      */
-    public final TableField<BookingRecord, Integer> FK_BANK_STATEMENT = createField(DSL.name("FK_BANK_STATEMENT"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<BookingRecord, Long> FK_BANK_STATEMENT = createField(DSL.name("FK_BANK_STATEMENT"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>VBKA.BOOKING.BOOKING_DATE</code>.
@@ -118,6 +119,11 @@ public class Booking extends TableImpl<BookingRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Vbka.VBKA;
+    }
+
+    @Override
+    public Identity<BookingRecord, Long> getIdentity() {
+        return (Identity<BookingRecord, Long>) super.getIdentity();
     }
 
     @Override
@@ -197,14 +203,14 @@ public class Booking extends TableImpl<BookingRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Integer, String, Integer, LocalDate, Integer, String> fieldsRow() {
+    public Row6<Long, String, Long, LocalDate, Integer, String> fieldsRow() {
         return (Row6) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function6<? super Integer, ? super String, ? super Integer, ? super LocalDate, ? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function6<? super Long, ? super String, ? super Long, ? super LocalDate, ? super Integer, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -212,7 +218,7 @@ public class Booking extends TableImpl<BookingRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super Integer, ? super String, ? super Integer, ? super LocalDate, ? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super Long, ? super String, ? super Long, ? super LocalDate, ? super Integer, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

@@ -16,6 +16,7 @@ public class ImportBankStatementController {
         var categorizationController = new ApplyCategorizationController();
         bookings.forEach(categorizationController::categorize);
 
+
         //BookingDAO bookingDAO = new BookingDAO();
         //bookings.forEach(bookingDAO::createBooking);
         return 0;

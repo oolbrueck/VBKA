@@ -14,6 +14,7 @@ import java.util.function.Function;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function3;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -53,7 +54,7 @@ public class BankStatement extends TableImpl<BankStatementRecord> {
     /**
      * The column <code>VBKA.BANK_STATEMENT.ID</code>.
      */
-    public final TableField<BankStatementRecord, Integer> ID = createField(DSL.name("ID"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<BankStatementRecord, Long> ID = createField(DSL.name("ID"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>VBKA.BANK_STATEMENT.FILE_NAME</code>.
@@ -101,6 +102,11 @@ public class BankStatement extends TableImpl<BankStatementRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Vbka.VBKA;
+    }
+
+    @Override
+    public Identity<BankStatementRecord, Long> getIdentity() {
+        return (Identity<BankStatementRecord, Long>) super.getIdentity();
     }
 
     @Override
@@ -152,14 +158,14 @@ public class BankStatement extends TableImpl<BankStatementRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, String, LocalDateTime> fieldsRow() {
+    public Row3<Long, String, LocalDateTime> fieldsRow() {
         return (Row3) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function3<? super Integer, ? super String, ? super LocalDateTime, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function3<? super Long, ? super String, ? super LocalDateTime, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -167,7 +173,7 @@ public class BankStatement extends TableImpl<BankStatementRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Integer, ? super String, ? super LocalDateTime, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Long, ? super String, ? super LocalDateTime, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

@@ -54,12 +54,12 @@ public class BookingRCategory extends TableImpl<BookingRCategoryRecord> {
     /**
      * The column <code>VBKA.BOOKING_R_CATEGORY.FK_BOOKING</code>.
      */
-    public final TableField<BookingRCategoryRecord, Integer> FK_BOOKING = createField(DSL.name("FK_BOOKING"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<BookingRCategoryRecord, Long> FK_BOOKING = createField(DSL.name("FK_BOOKING"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>VBKA.BOOKING_R_CATEGORY.FK_CATEGORY</code>.
      */
-    public final TableField<BookingRCategoryRecord, Integer> FK_CATEGORY = createField(DSL.name("FK_CATEGORY"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<BookingRCategoryRecord, Long> FK_CATEGORY = createField(DSL.name("FK_CATEGORY"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private BookingRCategory(Name alias, Table<BookingRCategoryRecord> aliased) {
         this(alias, aliased, null);
@@ -176,14 +176,14 @@ public class BookingRCategory extends TableImpl<BookingRCategoryRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, Integer> fieldsRow() {
+    public Row2<Long, Long> fieldsRow() {
         return (Row2) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function2<? super Long, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -191,7 +191,7 @@ public class BookingRCategory extends TableImpl<BookingRCategoryRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Long, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

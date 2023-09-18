@@ -12,11 +12,12 @@ import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function1;
+import org.jooq.Function2;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row1;
+import org.jooq.Row2;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -48,6 +49,11 @@ public class CategoryMatcher extends TableImpl<CategoryMatcherRecord> {
     public Class<CategoryMatcherRecord> getRecordType() {
         return CategoryMatcherRecord.class;
     }
+
+    /**
+     * The column <code>VBKA.CATEGORY_MATCHER.ID</code>.
+     */
+    public final TableField<CategoryMatcherRecord, Long> ID = createField(DSL.name("ID"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>VBKA.CATEGORY_MATCHER.MATCHING_WORD</code>.
@@ -90,6 +96,11 @@ public class CategoryMatcher extends TableImpl<CategoryMatcherRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Vbka.VBKA;
+    }
+
+    @Override
+    public Identity<CategoryMatcherRecord, Long> getIdentity() {
+        return (Identity<CategoryMatcherRecord, Long>) super.getIdentity();
     }
 
     @Override
@@ -137,18 +148,18 @@ public class CategoryMatcher extends TableImpl<CategoryMatcherRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row1 type methods
+    // Row2 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row1<String> fieldsRow() {
-        return (Row1) super.fieldsRow();
+    public Row2<Long, String> fieldsRow() {
+        return (Row2) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function1<? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function2<? super Long, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -156,7 +167,7 @@ public class CategoryMatcher extends TableImpl<CategoryMatcherRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function1<? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Long, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

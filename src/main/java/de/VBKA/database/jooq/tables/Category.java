@@ -15,6 +15,7 @@ import java.util.function.Function;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Function3;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
@@ -54,7 +55,7 @@ public class Category extends TableImpl<CategoryRecord> {
     /**
      * The column <code>VBKA.CATEGORY.ID</code>.
      */
-    public final TableField<CategoryRecord, Integer> ID = createField(DSL.name("ID"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<CategoryRecord, Long> ID = createField(DSL.name("ID"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>VBKA.CATEGORY.NAME</code>.
@@ -102,6 +103,11 @@ public class Category extends TableImpl<CategoryRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Vbka.VBKA;
+    }
+
+    @Override
+    public Identity<CategoryRecord, Long> getIdentity() {
+        return (Identity<CategoryRecord, Long>) super.getIdentity();
     }
 
     @Override
@@ -170,14 +176,14 @@ public class Category extends TableImpl<CategoryRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, String, String> fieldsRow() {
+    public Row3<Long, String, String> fieldsRow() {
         return (Row3) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function3<? super Integer, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function3<? super Long, ? super String, ? super String, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -185,7 +191,7 @@ public class Category extends TableImpl<CategoryRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Integer, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Long, ? super String, ? super String, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

@@ -4,6 +4,7 @@
 
 package de.VBKA.frontend;
 
+import de.VBKA.backend.dao.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,7 +48,16 @@ public class CategoryAddingSceneController {
         var keyWordName = inputKeyWordName.getText();
         var keyWords = chipContainer.getChildren().stream().map(node -> ((Button) node.lookup(".button")).getText()).toList();
         System.out.println("name: " + keyWordName + " keyWords: " + keyWords);
-        //TODO in die DB damit
+        (new UserDAO()).insertKeyWords(keyWordName, keyWords);
+
+        chipContainer.getChildren().clear();
+        inputKeyWordName.clear();
+        inputKeyWord.clear();
+        return 0;
+    }
+
+    public int backToMenu(ActionEvent event) {
+        new SceneController().switchToDashboard(event);
         return 0;
     }
 }

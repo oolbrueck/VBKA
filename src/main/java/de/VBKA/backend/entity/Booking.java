@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Booking {
 
-    private UUID id;
+    private int id;
     private BankAccount bankAccount;
     private LocalDate bookedDate;
     private String paymentParty; //Zahlungsbeteiligter
